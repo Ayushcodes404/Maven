@@ -10,8 +10,12 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - script: mvn test
+      displayName: 'Run Unit Tests'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/TEST-*.xml'
+      testRunTitle: 'Maven Test Results'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
